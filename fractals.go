@@ -1,28 +1,28 @@
 package fractals
 
 import (
-	"fmt"
-	"os"
-	"log"
-	"math"
 	"bufio"
+	"code.google.com/p/draw2d/draw2d"
 	"errors"
+	"fmt"
 	"image"
 	"image/png"
-	"code.google.com/p/draw2d/draw2d"
+	"log"
+	"math"
+	"os"
 )
 
 type Line struct {
 	X1, Y1, X2, Y2 float64
-	Width float64
-	Done bool
+	Width          float64
+	Done           bool
 }
 
 type TransformFunc func(Line) []Line
 
 type Fractal struct {
 	Transformer TransformFunc
-	Lines []Line
+	Lines       []Line
 }
 
 func NewFractal(transformer TransformFunc, initial []Line) Fractal {
@@ -33,7 +33,7 @@ func (f *Fractal) Evolve(n int) {
 	var nextLines, lastLines []Line
 	lastLines = f.Lines
 	for i := 0; i < n; i++ {
-		nextLines = nil//make([]Line, 0, len(lastLines))
+		nextLines = nil //make([]Line, 0, len(lastLines))
 		for _, line := range lastLines {
 			if line.Done {
 				nextLines = append(nextLines, line)
@@ -47,7 +47,6 @@ func (f *Fractal) Evolve(n int) {
 	f.Lines = nextLines
 }
 
-
 func (f Fractal) ToFile(path string) error {
 	if len(f.Lines) == 0 {
 		return errors.New("Nothing to draw")
@@ -57,7 +56,7 @@ func (f Fractal) ToFile(path string) error {
 	first := false
 	for _, line := range f.Lines {
 		if first {
-  			minX = math.Min(line.X1, line.X2)
+			minX = math.Min(line.X1, line.X2)
 			maxX = math.Max(line.X1, line.X2)
 			minY = math.Min(line.Y1, line.Y2)
 			maxY = math.Max(line.Y1, line.Y2)
@@ -69,13 +68,13 @@ func (f Fractal) ToFile(path string) error {
 		}
 	}
 
-	i := image.NewRGBA(image.Rect(0, 0, int(maxX - minX), int(maxY - minY)))
+	i := image.NewRGBA(image.Rect(0, 0, int(maxX-minX), int(maxY-minY)))
 	gc := draw2d.NewGraphicContext(i)
 
 	for _, line := range f.Lines {
 		gc.SetLineWidth(float64(line.Width))
-		gc.MoveTo(-minX + line.X1, -minY + line.Y1)
-		gc.LineTo(-minX + line.X2, -minY + line.Y2)
+		gc.MoveTo(-minX+line.X1, -minY+line.Y1)
+		gc.LineTo(-minX+line.X2, -minY+line.Y2)
 		gc.Stroke()
 	}
 
@@ -90,7 +89,7 @@ func NewLine(x1, y1, x2, y2, width float64) Line {
 
 func (line Line) Length() float64 {
 	x, y := (line.X2 - line.X1), (line.Y2 - line.Y1)
-	return math.Sqrt(x * x + y * y)
+	return math.Sqrt(x*x + y*y)
 }
 
 func (line Line) String() string {
@@ -101,7 +100,6 @@ func (line Line) String() string {
 		line.Y2,
 		line.Length())
 }
-
 
 func min(a, b int) int {
 	if a < b {
@@ -120,22 +118,22 @@ func max(a, b int) int {
 }
 
 func saveToPngFile(filePath string, m image.Image) {
-    f, err := os.Create(filePath)
-    if err != nil {
-        log.Println(err)
-        os.Exit(1)
-    }
-    defer f.Close()
-    b := bufio.NewWriter(f)
-    err = png.Encode(b, m)
-    if err != nil {
-        log.Println(err)
-        os.Exit(1)
-    }
-    err = b.Flush()
-    if err != nil {
-        log.Println(err)
-        os.Exit(1)
-    }
-    fmt.Printf("Wrote %s OK.\n", filePath)
+	f, err := os.Create(filePath)
+	if err != nil {
+		log.Println(err)
+		os.Exit(1)
+	}
+	defer f.Close()
+	b := bufio.NewWriter(f)
+	err = png.Encode(b, m)
+	if err != nil {
+		log.Println(err)
+		os.Exit(1)
+	}
+	err = b.Flush()
+	if err != nil {
+		log.Println(err)
+		os.Exit(1)
+	}
+	fmt.Printf("Wrote %s OK.\n", filePath)
 }
