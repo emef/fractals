@@ -55,3 +55,7 @@ f.ToFile("png/equal_fractal.png")
 -----
 
 ![tree fractal](png/tree_fractal.png "Tree Fractal")
+
+-----
+
+Inspired by blog post: http://georgemdallas.wordpress.com/2014/05/02/what-are-fractals-and-why-should-i-care/
