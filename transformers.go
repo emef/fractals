@@ -5,7 +5,7 @@ import (
 	"math/rand"
 )
 
-func equilateralTransformer(line Line) []Line {
+func EquilateralTransformer(line Line) []Line {
 	third := 1.0 / 3.0
 	slopeX := line.X2 - line.X1
 	slopeY := line.Y2 - line.Y1
@@ -43,7 +43,7 @@ func equilateralTransformer(line Line) []Line {
 	return []Line{line1, line2, line3, line4}
 }
 
-func treeTransformer(line Line) []Line {
+func TreeTransformer(line Line) []Line {
 	ang1 := 15.0 + rand.Float64()*10
 	ang2 := -(15.0 + rand.Float64()*10)
 	len1 := 0.8 + rand.Float64()*0.12
