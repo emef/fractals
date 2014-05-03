@@ -70,13 +70,15 @@ func (f Fractal) ToFile(path string) error {
 		}
 	}
 
-	i := image.NewRGBA(image.Rect(0, 0, int(maxX-minX), int(maxY-minY)))
+	w := int(maxX-minX) + 5
+	h := int(maxY-minY) + 5
+	i := image.NewRGBA(image.Rect(0, 0, w, h))
 	gc := draw2d.NewGraphicContext(i)
 
 	for _, line := range f.Lines {
 		gc.SetLineWidth(float64(line.Width))
-		gc.MoveTo(-minX+line.X1, -minY+line.Y1)
-		gc.LineTo(-minX+line.X2, -minY+line.Y2)
+		gc.MoveTo(2.5+-minX+line.X1, 2.5+-minY+line.Y1)
+		gc.LineTo(2.5+-minX+line.X2, 2.5+-minY+line.Y2)
 		gc.Stroke()
 	}
 
