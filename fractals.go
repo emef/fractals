@@ -53,13 +53,15 @@ func (f Fractal) ToFile(path string) error {
 	}
 
 	var minX, minY, maxX, maxY float64
-	first := false
+	first := true
+
 	for _, line := range f.Lines {
 		if first {
 			minX = math.Min(line.X1, line.X2)
 			maxX = math.Max(line.X1, line.X2)
 			minY = math.Min(line.Y1, line.Y2)
 			maxY = math.Max(line.Y1, line.Y2)
+			first = false
 		} else {
 			minX = math.Min(line.X1, math.Min(minX, line.X2))
 			maxX = math.Max(line.X1, math.Max(maxX, line.X2))
