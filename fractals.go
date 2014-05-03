@@ -29,7 +29,7 @@ func NewFractal(transformer TransformFunc, initial []Line) Fractal {
 	return Fractal{transformer, initial}
 }
 
-func (f *Fractal) Evolve(n int) {
+func (f *Fractal) Next(n int) {
 	var nextLines, lastLines []Line
 	lastLines = f.Lines
 	for i := 0; i < n; i++ {
