@@ -25,7 +25,7 @@ type Fractal struct {
 	Lines       []Line
 }
 
-func NewFractal(transformer TransformFunc, initial []Line) Fractal {
+func New(transformer TransformFunc, initial []Line) Fractal {
 	return Fractal{transformer, initial}
 }
 
