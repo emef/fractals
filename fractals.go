@@ -101,22 +101,6 @@ func (line Line) String() string {
 		line.Length())
 }
 
-func min(a, b int) int {
-	if a < b {
-		return a
-	} else {
-		return b
-	}
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	} else {
-		return b
-	}
-}
-
 func saveToPngFile(filePath string, m image.Image) {
 	f, err := os.Create(filePath)
 	if err != nil {
