@@ -19,8 +19,8 @@ lines := []fractals.Line{
 // fractal object, will transform each line according to EquilateralTransformer in each step
 f := fractals.New(fractals.EquilateralTransformer, lines)
 
-// go through 8 evolutions
-f.Evolve(8)
+// advance 8 iterations
+f.Next(8)
 
 // save fractal to png
 f.ToFile("png/equal_fractal.png")
