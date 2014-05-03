@@ -1,7 +1,7 @@
 fractals
 ========
 
-fractal generator library in golang
+line fractal generator library in golang
 
 **usage**
 
