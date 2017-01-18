@@ -2,7 +2,7 @@ package fractals
 
 import (
 	"bufio"
-	"code.google.com/p/draw2d/draw2d"
+	"github.com/llgcode/draw2d/draw2dimg"
 	"errors"
 	"fmt"
 	"image"
@@ -73,7 +73,7 @@ func (f Fractal) ToFile(path string) error {
 	w := int(maxX-minX) + 5
 	h := int(maxY-minY) + 5
 	i := image.NewRGBA(image.Rect(0, 0, w, h))
-	gc := draw2d.NewGraphicContext(i)
+	gc := draw2dimg.NewGraphicContext(i)
 
 	for _, line := range f.Lines {
 		gc.SetLineWidth(float64(line.Width))
